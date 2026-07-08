@@ -1,9 +1,4 @@
-#%%
-main.py （根目录主入口）
-
 python
-
-
 #!/usr/bin/env python3
 import sys
 import signal
@@ -42,100 +37,9 @@ if __name__ == "__main__":
         if system:
             system.stop()
         sys.exit(1)
- 
-
- 
-
-路径： README.md （根目录参赛说明）
-
 markdown
-
-
-# 工件视觉缺陷检测与智能分拣系统
-
-## 一、项目简介
-本项目基于地平线RDK X5开发板设计，面向中小制造企业零件产线场景，实现工件外观缺陷的实时视觉检测与智能分拣。系统通过板载BPU硬件加速AI推理，结合机械臂执行机构，完成「图像采集-缺陷识别-分类分拣-数据统计」的全自动化闭环，替代人工质检，提升产线效率。
-
-## 二、硬件平台
-- 主控：地平线RDK X5开发板
-- 视觉：MIPI/USB工业摄像头
-- 执行：串口总线机械臂
-- 传感：红外对射传感器、告警指示灯
-
-## 三、快速复现步骤
-1. 硬件连接：参照 `docs/hardware_guide.md` 完成接线
-2. 环境安装：
-   ```bash
-   cd scripts
-   chmod +x install.sh
-   ./install.sh
- 
-
-3. 模型部署：将BPU量化后的模型放入  models/  目录，修改  config/system_config.yaml  中模型路径
-4. 启动系统：
-bash
-
-
-cd scripts
-chmod +x start.sh
-./start.sh
- 
-
-四、核心功能
-
-- 工件自动到位触发检测
-- BPU实时缺陷识别（支持划痕、磕碰、缺料3类缺陷）
-- 机械臂自动分拣良品/次品
-- 运行数据统计与日志记录
-- 异常自动告警与自恢复
-
-五、性能指标
-
-- BPU推理帧率：≥30FPS @640×640分辨率
-- 检测准确率：≥95%（测试集）
-- 分拣节拍：≤8秒/件
-- 连续运行时长：≥72小时无崩溃
-
-plaintext
-
-
-
----
-
-### 路径：`LICENSE`（根目录开源协议）
- 
-
 MIT License
-
-Copyright (c) 2026 参赛团队
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-plaintext
-
-
-
----
-
-### 路径：`requirements.txt`（根目录依赖清单）
  
-
 pyyaml>=6.0
 numpy>=1.21.0
 opencv-python>=4.5.0
@@ -143,27 +47,8 @@ pyserial>=3.5
 
 plaintext
 
-
-
----
-
-### 路径：`CHANGELOG.md`（根目录版本记录）
 ```markdown
 # Changelog
-
-## v1.0 - 2026-07-08
-- 初始参赛版本发布
-- 完成BPU缺陷检测模块、机械臂控制模块、状态机调度核心
-- 新增单模块测试用例与一键部署脚本
-- 适配地平线RDK X5硬件平台
- 
-
- 
-
-路径： config/system_config.yaml （全局配置）
-
-yaml
-
 
 # 摄像头配置
 camera:
@@ -208,22 +93,6 @@ calibration:
 路径： models/README.md （模型说明）
 
 markdown
-
-
-# 模型文件说明
-
-## 文件说明
-- `defect_yolov8n.bin`：YOLOv8n缺陷检测模型，已完成BPU量化
-- 模型输入：640×640 RGB图像
-- 检测类别：良品(good)、划痕(scratch)、磕碰(dent)、缺料(lack_material)
-
-## 获取方式
-1. 使用地平线天工开物工具链自行量化YOLOv8模型
-2. 替换本目录下的bin文件，并同步修改config中类别名称与阈值
- 
-
- 
-
 路径： src/utils/common.py （通用工具）
 
 python
