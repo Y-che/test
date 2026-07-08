@@ -17,14 +17,6 @@ def signal_handler(signum, frame):
         system.stop()
     sys.exit(0)
 
-
-if __name__ == "__main__":
-    print("=" * 60)
-    print("  工件视觉缺陷检测与智能分拣系统 参赛版 v1.0")
-    print("  平台：地平线RDK X5 | BPU硬件加速推理")
-    print("  赛道：全国大学生嵌入式竞赛 地瓜机器人赛道赛题一")
-    print("=" * 60)
-
     # 注册信号处理
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
